@@ -4,25 +4,68 @@
   <meta charset="utf-8">
   <title>Omeka S Projects</title>
   <style>
-    body {
-      font-family: system-ui, sans-serif;
-      padding: 2rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-    .tile {
-      border: 1px solid #ddd;
-      padding: 1rem;
-      border-radius: 6px;
-      text-decoration: none;
-      color: inherit;
-    }
-    .tile:hover {
-      background: #f6f8fa;
-    }
+    :root {
+  --accent: #2f6feb;      /* GitHub-ish blue */
+  --accent-soft: #e7efff;
+  --border: #e1e4e8;
+  --text-muted: #57606a;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 2rem;
+  background: #fafbfc;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.tile {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tile h3 {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.links a {
+  display: inline-block;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.85rem;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.links a:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
   </style>
 </head>
 <body>
