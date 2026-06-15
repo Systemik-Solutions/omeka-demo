@@ -1,112 +1,137 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Omeka S Projects</title>
   <style>
     :root {
-  --accent: #2f6feb;      /* GitHub-ish blue */
-  --accent-soft: #e7efff;
-  --border: #e1e4e8;
-  --text-muted: #57606a;
-}
+      --accent: #2f6feb;
+      /* GitHub-ish blue */
+      --accent-soft: #e7efff;
+      --border: #e1e4e8;
+      --text-muted: #57606a;
+    }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  padding: 2rem;
-  background: #fafbfc;
-}
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 2rem;
+      background: #fafbfc;
+    }
 
-h1 {
-  margin-bottom: 1.5rem;
-}
+    h1 {
+      margin-bottom: 1.5rem;
+    }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
 
-.tile {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    .tile {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-.tile.project {
-  background: #dae2eb;
-  border-color: #d0d7de;
-}
+    .tile.project {
+      background: #dae2eb;
+      border-color: #d0d7de;
+    }
 
-.tile h3 {
-  margin: 0 0 1rem;
-  font-size: 1.05rem;
-  line-height: 1.3;
-}
+    .tile h3 {
+      margin: 0 0 1rem;
+      font-size: 1.05rem;
+      line-height: 1.3;
+    }
 
-.tile.module {
-  background: #fff1e6;
-  border-color: #f3c7a6;
-}
-    
-.tile.module h3::after {
-  content: " ★";
-  font-size: 0.85em;
-  color: #f1a33c;
-}
+    .tile.module {
+      background: #fff1e6;
+      border-color: #f3c7a6;
+    }
 
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
+    .tile.module h3::after {
+      content: " ★";
+      font-size: 0.85em;
+      color: #f1a33c;
+    }
 
-.links a {
-  display: inline-block;
-  padding: 0.4rem 0.7rem;
-  font-size: 0.85rem;
-  border-radius: 999px;
-  text-decoration: none;
-  color: var(--accent);
-  background: var(--accent-soft);
-  border: 1px solid transparent;
-  transition: all 0.15s ease;
-}
+    .project-image {
+      margin-bottom: 1rem;
+      overflow: hidden;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
 
-.links a:hover {
-  background: var(--accent);
-  color: #ffffff;
-}
+    .project-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .links a {
+      display: inline-block;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.85rem;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+    }
+
+    .links a:hover {
+      background: var(--accent);
+      color: #ffffff;
+    }
   </style>
 </head>
+
 <body>
   <h1>Project Showcase</h1>
 
   <div class="grid">
-    
+
     <div class="tile project">
       <h3>Opening the Multilingual Archive of Australia (OMAA)</h3>
+      <div class="project-image">
+        <img src="./images/omaa.png" alt="Preview of the Opening the Multilingual Archive of Australia website">
+      </div>
       <div class="links">
         <a href="https://omaa-arts.sydney.edu.au/">Front end</a>
         <a href="https://omaa.curated-collections.cloud.edu.au/admin">Back end</a>
       </div>
     </div>
 
-      <div class="tile project">
+    <div class="tile project">
       <h3>Grassroots Activism and Education (GAE)</h3>
+      <div class="project-image">
+        <img src="./images/coe.png" alt="Preview of the Grassroots Activism and Education website">
+      </div>
       <div class="links">
         <a href="https://grassroots-activism-education.sydney.edu.au/">Front end</a>
         <a href="https://coe.curated-collections.cloud.edu.au/admin">Back end</a>
       </div>
     </div>
 
-      <div class="tile project">
+    <div class="tile project">
       <h3>Transforming the East</h3>
+      <div class="project-image">
+        <img src="./images/tte.png" alt="Preview of the Transforming the East website">
+      </div>
       <div class="links">
         <a href="https://textus-sinici.org/">Front end</a>
         <a href="https://transforming-the-east.curated-collections.cloud.edu.au/admin">Back end</a>
@@ -115,6 +140,9 @@ h1 {
 
     <div class="tile project">
       <h3>Digital Atlas of Creative Captivity (DARCI)</h3>
+      <div class="project-image">
+        <img src="./images/darci.png" alt="Preview of the Digital Atlas of Creative Captivity website">
+      </div>
       <div class="links">
         <a href="https://darci-collection-arts.sydney.edu.au/">Front end</a>
         <a href="https://creativity-in-captivity.curated-collections.cloud.edu.au/admin">Back end</a>
@@ -123,6 +151,9 @@ h1 {
 
     <div class="tile project">
       <h3>Bali Paintings</h3>
+      <div class="project-image">
+        <img src="./images/bp.png" alt="Preview of the Bali Paintings website">
+      </div>
       <div class="links">
         <a href="https://bali-paintings.curated-collections.cloud.edu.au/s/bali-paintings/page/home">Front end</a>
         <a href="https://ngc-staging.performx.com.au/bp-omeka/admin">Back end</a>
@@ -130,16 +161,22 @@ h1 {
     </div>
 
     <div class="tile project">
-      <h3>Expert Nation</h3>
+      <h3>Digital Harlem</h3>
+      <div class="project-image">
+        <img src="./images/digital-harlem.png" alt="Preview of the Digital Harlem website">
+      </div>
       <div class="links">
-        <a href="https://expert-nation.curated-collections.cloud.edu.au/s/beyond1914/page/home">Front end 1</a>
-        <a href="https://expert-nation.curated-collections.cloud.edu.au/s/beyond1939/page/home">Front end 2</a>
-        <a href="https://expert-nation.curated-collections.cloud.edu.au/admin">Back end</a>
+        <a href="https://ngc-staging.performx.com.au/dh-omeka/s/digital-harlem/page/home">Front end</a>
+        <a href="https://ngc-staging.performx.com.au/dh-omeka/s/digital-harlem-1935/page/home">Front end: Subsite</a>
+        <a href="https://ngc-staging.performx.com.au/dh-omeka/admin">Back end</a>
       </div>
     </div>
 
     <div class="tile project">
       <h3>Australian Holocaust Memory</h3>
+      <div class="project-image">
+        <img src="./images/holocaustmemory.png" alt="Preview of the Australian Holocaust Memory website">
+      </div>
       <div class="links">
         <a href="https://holocaust.wp-staging.performx.com.au/">Front end</a>
         <a href="https://holocaust-omeka.performx.com.au/admin">Back end</a>
@@ -148,6 +185,9 @@ h1 {
 
     <div class="tile project">
       <h3>Pali Texts</h3>
+      <div class="project-image">
+        <img src="./images/pali-text.png" alt="Preview of the Pali Texts website">
+      </div>
       <div class="links">
         <a href="https://kuthodaw-texts.net/s/pali-texts/page/home">Front end</a>
         <a href="https://kuthodaw-texts.net/admin">Back end</a>
@@ -155,106 +195,130 @@ h1 {
     </div>
 
     <div class="tile project">
-      <h3>Digital Harlem</h3>
+      <h3>Expert Nation</h3>
+      <div class="project-image">
+        <img src="./images/en.png" alt="Preview of the Expert Nation website">
+      </div>
       <div class="links">
-        <a href="https://ngc-staging.performx.com.au/dh-omeka/s/digital-harlem/page/home">Front end</a>
-        <a href="https://ngc-staging.performx.com.au/dh-omeka/s/digital-harlem-1935/page/home">Front end: Subsite</a>
-        <a href="https://ngc-staging.performx.com.au/dh-omeka/admin">Back end</a>
+        <a href="https://expert-nation.curated-collections.cloud.edu.au/s/beyond1914/page/home">Front end 1</a>
+        <a href="https://expert-nation.curated-collections.cloud.edu.au/s/war-reconstruction/page/home">Front end 2</a>
+        <a href="https://expert-nation.curated-collections.cloud.edu.au/admin">Back end</a>
       </div>
     </div>
-    
+
   </div>
-<h2>Modules</h2>
+  <h2>Modules</h2>
 
-<div class="grid">
+  <div class="grid">
 
-  <div class="tile">
-    <h3>Custom Ontology</h3>
-    <p class="description">
-      Create specific classes and properties to describe resources when no standard ontologies are available, in particular on schema.org and in other places. It is useful to manage internal properties, or for researchers who are creating new data. The properties and classes are available via the standard API of Omeka S too, like any other ontology.
-    </p>
-    <div class="links">
-      <a href="https://github.com/Daniel-KM/Omeka-s-module-CustomOntology/releases/download/3.4.6/CustomOntology-3.4.6.zip">Repository</a>
-      <a href="https://omaa.curated-collections.cloud.edu.au/admin/vocabulary">Project Example</a>
+    <div class="tile">
+      <h3>Custom Ontology</h3>
+      <p class="description">
+        Create specific classes and properties to describe resources when no standard ontologies are available, in
+        particular on schema.org and in other places. It is useful to manage internal properties, or for researchers who
+        are creating new data. The properties and classes are available via the standard API of Omeka S too, like any
+        other ontology.
+      </p>
+      <div class="links">
+        <a
+          href="https://github.com/Daniel-KM/Omeka-s-module-CustomOntology/releases/download/3.4.6/CustomOntology-3.4.6.zip">Repository</a>
+        <a href="https://omaa.curated-collections.cloud.edu.au/admin/vocabulary">Project Example</a>
+      </div>
     </div>
-  </div>
 
-   <div class="tile">
-    <h3>CSV Import</h3>
-    <p class="description">
-      Import Entities from a simple CSV (comma separated value) file, and then map the CSV column data to Entity.
-    </p>
-    <div class="links">
-      <a href="https://github.com/omeka-s-modules/CSVImport/releases/download/v2.6.2/CSVImport-2.6.2.zip">Repository</a>
-      <a href="https://omaa.curated-collections.cloud.edu.au/admin/csvimport">Project Example</a>
+    <div class="tile">
+      <h3>CSV Import</h3>
+      <p class="description">
+        Import Entities from a simple CSV (comma separated value) file, and then map the CSV column data to Entity.
+      </p>
+      <div class="links">
+        <a
+          href="https://github.com/omeka-s-modules/CSVImport/releases/download/v2.6.2/CSVImport-2.6.2.zip">Repository</a>
+        <a href="https://omaa.curated-collections.cloud.edu.au/admin/csvimport">Project Example</a>
+      </div>
     </div>
-  </div>
 
-   <div class="tile">
-    <h3>Custom Vocab</h3>
-    <p class="description">
-      Create custom vocabularies and add them as data types to your resource templates.
-    </p>
-    <div class="links">
-      <a href="https://github.com/omeka-s-modules/CustomVocab/releases/download/v2.0.2/CustomVocab-2.0.2.zip">Repository</a>
-      <a href="https://creativity-in-captivity.curated-collections.cloud.edu.au/admin/custom-vocab">Project Example</a>
+    <div class="tile">
+      <h3>Custom Vocab</h3>
+      <p class="description">
+        Create custom vocabularies and add them as data types to your resource templates.
+      </p>
+      <div class="links">
+        <a
+          href="https://github.com/omeka-s-modules/CustomVocab/releases/download/v2.0.2/CustomVocab-2.0.2.zip">Repository</a>
+        <a href="https://creativity-in-captivity.curated-collections.cloud.edu.au/admin/custom-vocab">Project
+          Example</a>
+      </div>
     </div>
-  </div>
 
-   <div class="tile">
-    <h3>Data Types</h3>
-    <p class="description">
-      3 modules (Data Type Geometry, Data Type RDF, and Numeric Data Types) for adding new data types for the values of properties. 
-    </p>
-    <div class="links">
-      <a href="https://creativity-in-captivity.curated-collections.cloud.edu.au/admin/resource-template/9/edit">Project Example</a>
+    <div class="tile">
+      <h3>Data Types</h3>
+      <p class="description">
+        3 modules (Data Type Geometry, Data Type RDF, and Numeric Data Types) for adding new data types for the values
+        of properties.
+      </p>
+      <div class="links">
+        <a href="https://creativity-in-captivity.curated-collections.cloud.edu.au/admin/resource-template/9/edit">Project
+          Example</a>
+      </div>
     </div>
-  </div>
 
-  <div class="tile">
-    <h3>Zotero Import and Zotero Citations</h3>
-    <p class="description">
-      Two modules to import items from Zotero, and to use Zotero in rich-text editors to generate citations and bibliographies.
-    </p>
-    <div class="links">
-      <a href="https://github.com/omeka-s-modules/ZoteroCitations/releases/download/v1.0.0/ZoteroCitations-1.0.0.zip">Repository</a>
+    <div class="tile">
+      <h3>Zotero Import and Zotero Citations</h3>
+      <p class="description">
+        Two modules to import items from Zotero, and to use Zotero in rich-text editors to generate citations and
+        bibliographies.
+      </p>
+      <div class="links">
+        <a
+          href="https://github.com/omeka-s-modules/ZoteroCitations/releases/download/v1.0.0/ZoteroCitations-1.0.0.zip">Repository</a>
+      </div>
     </div>
-  </div>
 
-   <div class="tile module">
-    <h3>Node Graph</h3>
-    <p class="description">
-      Create interactive node graph visualizations with flexible configuration for item selection, grouping, styling, and relationship mapping.
-    </p>
-    <div class="links">
-      <a href="https://github.com/Systemik-Solutions/OmekaS-NodeGraph/releases/download/v1.0.0/NodeGraph-1.0.0.zip">Repository</a>
-      <a href="https://grassroots-activism-education.sydney.edu.au/explore/?view=network">Project Example</a>
+    <div class="tile module">
+      <h3>Node Graph</h3>
+      <p class="description">
+        Create interactive node graph visualizations with flexible configuration for item selection, grouping, styling,
+        and relationship mapping.
+      </p>
+      <div class="links">
+        <a
+          href="https://github.com/Systemik-Solutions/OmekaS-NodeGraph/releases/download/v1.0.0/NodeGraph-1.0.0.zip">Repository</a>
+        <a href="https://grassroots-activism-education.sydney.edu.au/explore/?view=network">Project Example</a>
+      </div>
     </div>
-  </div>
 
-  <div class="tile module">
-    <h3>Glycerine IIIF Viewer</h3>
-    <p class="description">
-      Embed IIIF manifests using the lightweight Glycerine Viewer. This module supports both automatic rendering from item metadata and manual embedding via site blocks.
-    </p>
-    <div class="links">
-      <a href="https://github.com/Systemik-Solutions/OmekaS-GlycerineViewer/releases/download/v1.0.0/GlycerineIIIFViewer-1.0.0.zip">Repository</a>
-      <a href="https://ngc-staging.performx.com.au/bp-omeka/s/bali-paintings/item/60">Project Example</a>
+    <div class="tile module">
+      <h3>Glycerine IIIF Viewer</h3>
+      <p class="description">
+        Embed IIIF manifests using the lightweight Glycerine Viewer. This module supports both automatic rendering from
+        item metadata and manual embedding via site blocks.
+      </p>
+      <div class="links">
+        <a
+          href="https://github.com/Systemik-Solutions/OmekaS-GlycerineViewer/releases/download/v1.0.0/GlycerineIIIFViewer-1.0.0.zip">Repository</a>
+        <a href="https://ngc-staging.performx.com.au/bp-omeka/s/bali-paintings/item/60">Project Example</a>
+      </div>
     </div>
-  </div>
 
-   <div class="tile module">
-    <h3>Mapping</h3>
-    <p class="description">
-      This module expands the mapping functionality in Omeka S by adding new configuration options and visualization modes. It allows users to map not only attached or queried items, but also their linked items, group items with custom colors, and visualize journeys of geo-located resources.
-    </p>
-    <div class="links">
-      <a href="https://github.com/Systemik-Solutions/OmekaS-MappingExtensions/releases/download/v1.0.0/MappingExtensions-1.0.0.zip">Repository</a>
-      <a href="https://omaa-arts.sydney.edu.au/archive/?hq=property%255B0%255D%255Bjoiner%255D%3Dand%26property%255B0%255D%255Bproperty%255D%3D1696%26property%255B0%255D%255Btype%255D%3Deq%26property%255B0%255D%255Btext%255D%3D1.%2BSettlement%26resource_template_id%255B%255D%3D17%26resource_template_id%255B%255D%3D14%26resource_template_id%255B%255D%3D13&p1696%5B%5D=1.+Settlement&rt%5B%5D=17&rt%5B%5D=14&rt%5B%5D=13&d1571=1602-2024&view=listmap">Project Example</a>
+    <div class="tile module">
+      <h3>Mapping</h3>
+      <p class="description">
+        This module expands the mapping functionality in Omeka S by adding new configuration options and visualization
+        modes. It allows users to map not only attached or queried items, but also their linked items, group items with
+        custom colors, and visualize journeys of geo-located resources.
+      </p>
+      <div class="links">
+        <a
+          href="https://github.com/Systemik-Solutions/OmekaS-MappingExtensions/releases/download/v1.0.0/MappingExtensions-1.0.0.zip">Repository</a>
+        <a
+          href="https://omaa-arts.sydney.edu.au/archive/?hq=property%255B0%255D%255Bjoiner%255D%3Dand%26property%255B0%255D%255Bproperty%255D%3D1696%26property%255B0%255D%255Btype%255D%3Deq%26property%255B0%255D%255Btext%255D%3D1.%2BSettlement%26resource_template_id%255B%255D%3D17%26resource_template_id%255B%255D%3D14%26resource_template_id%255B%255D%3D13&p1696%5B%5D=1.+Settlement&rt%5B%5D=17&rt%5B%5D=14&rt%5B%5D=13&d1571=1602-2024&view=listmap">Project
+          Example</a>
+      </div>
     </div>
+
   </div>
-  
-</div>
 
 </body>
+
 </html>
