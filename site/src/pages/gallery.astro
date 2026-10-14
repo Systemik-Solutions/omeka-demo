@@ -1,0 +1,155 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Icon from "../components/Icon.astro";
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const tags = [
+  "All collections",
+  ...new Set(projects.flatMap((p) => p.data.tags).sort()),
+];
+---
+
+<BaseLayout
+  title="Gallery"
+  description="Explore research projects, exhibitions and collections supported by Curated Collections."
+>
+  <PageBanner
+    title="Gallery"
+    summary="Discover the research, stories and connections within our digital collections."
+  />
+  <section class="gallery-page section">
+    <div class="container">
+      <p class="eyebrow">Featured collections</p>
+      <h2>Explore the Gallery</h2>
+      <p class="gallery-intro">
+        Browse curated websites for research projects, exhibitions and
+        collections. Filter the gallery by HASS disciplines and fields.
+      </p>
+      <div class="gallery-tools" hidden>
+        <div
+          class="filter-buttons"
+          role="group"
+          aria-label="Filter collections by discipline"
+        >
+          {tags.map((tag, i) => (
+            <button
+              type="button"
+              class="filter-button"
+              data-filter={i === 0 ? "" : tag}
+              aria-pressed={i === 0 ? "true" : "false"}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+        <label class="search-field">
+          <Icon name="search" size={19} />
+          <span class="sr-only">Search collections</span>
+          <input
+            type="search"
+            name="search"
+            placeholder="Search collections"
+            autocomplete="off"
+          />
+        </label>
+      </div>
+      <p
+        class="results-count"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {projects.length} collections
+      </p>
+      <div class="project-grid">
+        {projects.map((project, index) => (
+          <ProjectCard project={project} eager={index < 3} />
+        ))}
+      </div>
+      <div class="empty-state" hidden>
+        <Icon name="search" size={36} />
+        <h3>No collections found</h3>
+        <p>Try another search or select a different discipline.</p>
+        <button type="button" class="button button-outline" data-reset>
+          Clear filters
+        </button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<script>
+  const tools = document.querySelector<HTMLElement>(".gallery-tools");
+  if (tools) {
+    tools.hidden = false;
+    const buttons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-filter]"),
+    );
+    const cards = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-project]"),
+    );
+    const input = document.querySelector<HTMLInputElement>(
+      'input[type="search"]',
+    )!;
+    const status = document.querySelector<HTMLElement>(".results-count")!;
+    const empty = document.querySelector<HTMLElement>(".empty-state")!;
+    let active = "";
+    const update = (syncUrl = true) => {
+      let count = 0;
+      const query = input.value.trim().toLowerCase();
+      cards.forEach((card) => {
+        const tags = JSON.parse(card.dataset.tags || "[]") as string[];
+        const matches =
+          (!active || tags.includes(active)) &&
+          (!query || card.dataset.search?.includes(query));
+        card.hidden = !matches;
+        if (matches) count++;
+      });
+      buttons.forEach((button) =>
+        button.setAttribute(
+          "aria-pressed",
+          String(button.dataset.filter === active),
+        ),
+      );
+      status.textContent = `${count} ${count === 1 ? "collection" : "collections"}${active ? ` in ${active}` : ""}${query ? ` matching “${input.value.trim()}”` : ""}`;
+      empty.hidden = count > 0;
+      if (syncUrl) {
+        const next = new URL(location.href);
+        active
+          ? next.searchParams.set("discipline", active)
+          : next.searchParams.delete("discipline");
+        query
+          ? next.searchParams.set("q", input.value.trim())
+          : next.searchParams.delete("q");
+        history.replaceState(null, "", next);
+      }
+    };
+    const restore = () => {
+      const params = new URLSearchParams(location.search);
+      const requested = params.get("discipline") || "";
+      active = buttons.some((b) => b.dataset.filter === requested)
+        ? requested
+        : "";
+      input.value = params.get("q") || "";
+      update(false);
+    };
+    buttons.forEach((button) =>
+      button.addEventListener("click", () => {
+        active = button.dataset.filter || "";
+        update();
+      }),
+    );
+    input.addEventListener("input", () => update());
+    document.querySelector("[data-reset]")?.addEventListener("click", () => {
+      active = "";
+      input.value = "";
+      update();
+      input.focus();
+    });
+    window.addEventListener("popstate", restore);
+    restore();
+  }
+</script>

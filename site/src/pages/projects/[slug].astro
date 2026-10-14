@@ -1,0 +1,100 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { url } from "../../lib/site";
+export async function getStaticPaths() {
+  return (await getCollection("projects")).map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+const { project } = Astro.props;
+const p = project.data;
+const { Content } = await render(project);
+const related = (
+  await getCollection(
+    "projects",
+    ({ id, data }) =>
+      id !== project.id &&
+      data.status === "available" &&
+      data.tags.some((tag) => p.tags.includes(tag)),
+  )
+)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+---
+
+<BaseLayout title={p.title} description={p.summary}>
+  <section class="project-detail-header">
+    <div class="container">
+      <a class="text-link" href={url("/gallery/")}>
+        <Icon name="arrow" class="rotate" size={18} /> Back to gallery
+      </a>
+      <p class="eyebrow">{p.institution || "Research collection"}</p>
+      <h1>{p.title}</h1>
+      <div class="detail-tags">
+        {p.tags.map((tag) => (
+          <a href={`${url("/gallery/")}?discipline=${encodeURIComponent(tag)}`}>
+            {tag}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <div class="container project-detail-grid">
+    <div>
+      <img
+        class:list={[
+          "detail-image",
+          { "detail-placeholder": p.status === "coming-soon" },
+        ]}
+        src={url(p.image)}
+        alt={p.imageAlt}
+        width="1200"
+        height="700"
+      />
+      <article class="prose project-prose">
+        <Content />
+      </article>
+    </div>
+    <aside class="collection-info">
+      <p class="eyebrow">Collection information</p>
+      <dl>
+        {p.institution && (
+          <>
+            <dt>Institution</dt>
+            <dd>{p.institution}</dd>
+          </>
+        )}
+        <dt>Disciplines</dt>
+        <dd>{p.tags.join(", ")}</dd>
+        <dt>Availability</dt>
+        <dd>
+          {p.status === "available"
+            ? "Collection website available"
+            : "In development"}
+        </dd>
+      </dl>
+      {p.links.map((link) => (
+        <a class="button button-gold" href={link.url}>
+          {link.label} <Icon name="external" size={16} />
+        </a>
+      ))}
+    </aside>
+  </div>
+  {related.length > 0 && (
+    <section class="section related-section">
+      <div class="container">
+        <p class="eyebrow">Keep exploring</p>
+        <h2 class="spaced-heading">Related collections</h2>
+        <div class="project-grid">
+          {related.map((p) => (
+            <ProjectCard project={p} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>

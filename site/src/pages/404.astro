@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { url } from "../lib/site";
+---
+
+<BaseLayout title="Page not found">
+  <section class="section">
+    <div class="container not-found">
+      <p class="eyebrow">404 — Page not found</p>
+      <h1>Let’s find your way back.</h1>
+      <p>
+        The page may have moved. Explore the collection gallery or return to the
+        homepage.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-gold" href={url("/")}>
+          Return home
+        </a>
+        <a class="button button-outline" href={url("/gallery/")}>
+          Explore the gallery
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

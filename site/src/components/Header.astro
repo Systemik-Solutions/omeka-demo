@@ -1,0 +1,80 @@
+---
+import { navigation, url } from "../lib/site";
+import Icon from "./Icon.astro";
+const path = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={url("/")} aria-label="Curated Collections home">
+      <img
+        src={url("/brand/logo.svg")}
+        alt="Curated Collections"
+        width="256"
+        height="29"
+      />
+    </a>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+      aria-label="Open navigation"
+      hidden
+    >
+      <Icon name="menu" />
+      <span>Menu</span>
+    </button>
+    <nav
+      id="primary-navigation"
+      class="primary-navigation"
+      aria-label="Main navigation"
+    >
+      {navigation.map((item) => (
+        <a
+          href={url(item.path)}
+          aria-current={path.startsWith(url(item.path)) ? "page" : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a class="button button-small button-gold" href={url("/contact/")}>
+        Register your interest
+      </a>
+    </nav>
+  </div>
+</header>
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const nav = document.querySelector<HTMLElement>("#primary-navigation");
+  if (toggle && nav) {
+    toggle.hidden = false;
+    nav.dataset.enhanced = "true";
+    const close = () => {
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open navigation");
+      nav.classList.remove("is-open");
+    };
+    toggle.addEventListener("click", () => {
+      const open = toggle.getAttribute("aria-expanded") !== "true";
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute(
+        "aria-label",
+        open ? "Close navigation" : "Open navigation",
+      );
+      nav.classList.toggle("is-open", open);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (
+        event.key === "Escape" &&
+        toggle.getAttribute("aria-expanded") === "true"
+      ) {
+        close();
+        toggle.focus();
+      }
+    });
+    nav
+      .querySelectorAll("a")
+      .forEach((link) => link.addEventListener("click", close));
+  }
+</script>

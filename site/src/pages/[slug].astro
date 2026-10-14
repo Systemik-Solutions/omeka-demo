@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+import Partners from "../components/Partners.astro";
+import EnquiryBanner from "../components/EnquiryBanner.astro";
+import { url } from "../lib/site";
+export async function getStaticPaths() {
+  return (await getCollection("pages")).map((page) => ({
+    params: { slug: page.id },
+    props: { page },
+  }));
+}
+const { page } = Astro.props;
+const { Content, headings } = await render(page);
+const sections = headings.filter((h) => h.depth === 2);
+---
+
+<BaseLayout title={page.data.title} description={page.data.summary}>
+  <PageBanner title={page.data.title} summary={page.data.summary} />
+  <div
+    class:list={[
+      "container",
+      "content-layout",
+      { "about-content": page.data.template === "about" },
+    ]}
+  >
+    <aside class="content-aside">
+      <a class="breadcrumb" href={url("/")}>
+        Home
+      </a>
+      <span aria-hidden="true"> / </span>
+      <span>{page.data.eyebrow}</span>
+      <nav aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        {sections.map((section) => (
+          <a href={`#${section.slug}`}>{section.text}</a>
+        ))}
+      </nav>
+    </aside>
+    <article class="prose">
+      <Content />
+    </article>
+  </div>
+  {page.data.template === "about" && (
+    <>
+      <Partners />
+      <EnquiryBanner />
+    </>
+  )}
+</BaseLayout>

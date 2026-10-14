@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { url } from "../lib/site";
+import Icon from "./Icon.astro";
+interface Props {
+  project: CollectionEntry<"projects">;
+  eager?: boolean;
+}
+const { project, eager = false } = Astro.props;
+const p = project.data;
+---
+
+<article
+  class="project-card"
+  data-project
+  data-tags={JSON.stringify(p.tags)}
+  data-search={`${p.title} ${p.summary} ${p.institution}`.toLowerCase()}
+>
+  <a
+    class:list={[
+      "project-image",
+      { "project-image-placeholder": p.status === "coming-soon" },
+    ]}
+    href={url(`/projects/${project.id}/`)}
+    tabindex="-1"
+    aria-hidden="true"
+  >
+    <img
+      src={url(p.image)}
+      alt=""
+      width="826"
+      height="448"
+      loading={eager ? "eager" : "lazy"}
+    />
+  </a>
+  <div class="project-tags">
+    {p.tags.slice(0, 3).map((tag) => (
+      <span>{tag}</span>
+    ))}
+  </div>
+  <div class="project-body">
+    <p class="project-institution">
+      {p.institution ||
+        (p.status === "coming-soon" ? "In development" : "Research collection")}
+    </p>
+    <h3>
+      <a href={url(`/projects/${project.id}/`)}>{p.title}</a>
+    </h3>
+    <p class="project-summary">{p.summary}</p>
+    <a
+      href={url(`/projects/${project.id}/`)}
+      class="button button-outline project-button"
+      aria-label={`Discover ${p.title}`}
+    >
+      Discover more <Icon name="arrow" size={17} />
+    </a>
+  </div>
+</article>

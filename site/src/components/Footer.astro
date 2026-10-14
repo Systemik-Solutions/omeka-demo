@@ -1,0 +1,53 @@
+---
+import { navigation, url } from "../lib/site";
+import Icon from "./Icon.astro";
+const information = [
+  ["Contact", "/contact/"],
+  ["Privacy", "/privacy/"],
+  ["Terms", "/terms/"],
+  ["Accessibility", "/accessibility/"],
+];
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-identity">
+        <a href={url("/")}>
+          <img
+            src={url("/brand/logo-light.svg")}
+            alt="Curated Collections home"
+            width="420"
+            height="48"
+            loading="lazy"
+          />
+        </a>
+        <p>Trusted digital infrastructure for research collections</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <p class="eyebrow">Explore</p>
+        {navigation.map((item) => (
+          <a href={url(item.path)}>{item.label}</a>
+        ))}
+      </nav>
+      <nav class="footer-nav" aria-label="Information">
+        <p class="eyebrow">Information</p>
+        {information.map(([label, path]) => (
+          <a href={url(path)}>{label}</a>
+        ))}
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="legal-links">
+        <a href={url("/privacy/")}>Privacy Policy</a>
+        <span>·</span>
+        <a href={url("/terms/")}>Copyright</a>
+        <span>·</span>
+        <a href={url("/accessibility/")}>Accessibility</a>
+      </div>
+      <a class="button button-small button-gold" href={url("/contact/")}>
+        Register your interest <Icon name="arrow" size={15} />
+      </a>
+    </div>
+  </div>
+</footer>

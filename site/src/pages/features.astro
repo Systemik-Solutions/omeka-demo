@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+import FeatureCard from "../components/FeatureCard.astro";
+import EnquiryBanner from "../components/EnquiryBanner.astro";
+const features = (await getCollection("features")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout title="Features">
+  <PageBanner
+    title="Features"
+    summary="The tools and support to make research open, accessible and reusable."
+  />
+  <section class="section features-section">
+    <div class="container">
+      <p class="eyebrow">From collection to connection</p>
+      <h2 class="spaced-heading">Built around your research</h2>
+      <div class="feature-grid">
+        {features.map((feature) => (
+          <FeatureCard feature={feature} />
+        ))}
+      </div>
+    </div>
+  </section>
+  <EnquiryBanner />
+</BaseLayout>

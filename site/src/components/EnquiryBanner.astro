@@ -1,0 +1,15 @@
+---
+import { url } from "../lib/site";
+import Icon from "./Icon.astro";
+---
+
+<section class="enquiry-banner" aria-labelledby="enquiry-heading">
+  <div class="container enquiry-inner">
+    <h2 id="enquiry-heading">
+      Want to know how we can assist with your research project?
+    </h2>
+    <a href={url("/contact/")} class="enquiry-link">
+      Enquire today <Icon name="arrow" size={54} />
+    </a>
+  </div>
+</section>

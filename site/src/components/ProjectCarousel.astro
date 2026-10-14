@@ -1,0 +1,78 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ProjectCard from "./ProjectCard.astro";
+import Icon from "./Icon.astro";
+interface Props {
+  projects: CollectionEntry<"projects">[];
+}
+const { projects } = Astro.props;
+---
+
+<div class="carousel" data-carousel>
+  <div
+    class="carousel-track"
+    id="featured-collections"
+    tabindex="0"
+    role="region"
+    aria-label="Featured collections"
+  >
+    {projects.map((project) => (
+      <ProjectCard project={project} />
+    ))}
+  </div>
+  <div class="carousel-controls" hidden>
+    <button
+      class="circle-button"
+      data-direction="-1"
+      aria-label="Previous collections"
+      aria-controls="featured-collections"
+    >
+      <Icon name="arrow" class="rotate" size={21} />
+    </button>
+    <span class="carousel-label">Explore the collections</span>
+    <button
+      class="circle-button"
+      data-direction="1"
+      aria-label="Next collections"
+      aria-controls="featured-collections"
+    >
+      <Icon name="arrow" size={21} />
+    </button>
+  </div>
+</div>
+<script>
+  document
+    .querySelectorAll<HTMLElement>("[data-carousel]")
+    .forEach((carousel) => {
+      const track = carousel.querySelector<HTMLElement>(".carousel-track");
+      const controls =
+        carousel.querySelector<HTMLElement>(".carousel-controls");
+      if (!track || !controls) return;
+      controls.hidden = false;
+      const buttons =
+        carousel.querySelectorAll<HTMLButtonElement>("[data-direction]");
+      const update = () =>
+        buttons.forEach((button) => {
+          button.disabled =
+            button.dataset.direction === "-1"
+              ? track.scrollLeft <= 2
+              : track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+        });
+      buttons.forEach((button) =>
+        button.addEventListener("click", () => {
+          const cardWidth =
+            track.querySelector<HTMLElement>(".project-card")?.offsetWidth ||
+            track.clientWidth;
+          track.scrollBy({
+            left: Number(button.dataset.direction) * (cardWidth + 20),
+            behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+              ? "instant"
+              : "smooth",
+          });
+        }),
+      );
+      track.addEventListener("scroll", update, { passive: true });
+      new ResizeObserver(update).observe(track);
+      update();
+    });
+</script>

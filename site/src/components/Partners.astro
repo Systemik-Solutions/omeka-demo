@@ -1,0 +1,51 @@
+---
+import { url, programmeUrl } from "../lib/site";
+---
+
+<section class="partners section" aria-labelledby="partners-heading">
+  <div class="container">
+    <p class="eyebrow">Partners</p>
+    <h2 id="partners-heading">Our Partners</h2>
+    <div class="partner-grid">
+      <a
+        class="partner"
+        href="https://www.sydney.edu.au/research/facilities/sydney-informatics-hub.html"
+        aria-label="Sydney Informatics Hub, University of Sydney"
+      >
+        <img
+          src={url("/brand/sydney-informatics-hub.png")}
+          alt="Sydney Informatics Hub"
+          width="270"
+          height="137"
+          loading="lazy"
+        />
+      </a>
+      <a
+        class="partner"
+        href={programmeUrl}
+        aria-label="Australian Research Data Commons"
+      >
+        <img
+          src={url("/brand/ardc.svg")}
+          alt="ARDC — Australian Research Data Commons"
+          width="292"
+          height="96"
+          loading="lazy"
+        />
+      </a>
+      <a
+        class="partner"
+        href="https://systemiksolutions.com/"
+        aria-label="Systemik Solutions"
+      >
+        <img
+          src={url("/brand/systemik.png")}
+          alt="Systemik Solutions"
+          width="310"
+          height="59"
+          loading="lazy"
+        />
+      </a>
+    </div>
+  </div>
+</section>

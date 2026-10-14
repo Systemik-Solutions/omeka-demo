@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Icon from "./Icon.astro";
+interface Props {
+  feature: CollectionEntry<"features">;
+}
+const { feature } = Astro.props;
+---
+
+<article class="feature-card" id={feature.id}>
+  <div
+    class:list={["feature-icon", { "icon-gold": feature.data.order % 2 === 0 }]}
+  >
+    <Icon name={feature.data.icon} size={23} />
+  </div>
+  <h3>{feature.data.title}</h3>
+  <p>{feature.data.summary}</p>
+</article>

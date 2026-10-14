@@ -1,0 +1,14 @@
+---
+interface Props {
+  title: string;
+  summary: string;
+}
+const { title, summary } = Astro.props;
+---
+
+<section class="page-banner">
+  <div class="container page-banner-inner">
+    <h1>{title}</h1>
+    <p>{summary}</p>
+  </div>
+</section>
