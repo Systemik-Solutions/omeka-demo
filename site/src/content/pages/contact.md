@@ -23,9 +23,9 @@ panel:
     label: "Email the project team"
     subject: "Curated Collections enquiry"
   fallback:
-    description: "Curated Collections is part of the ARDC Community Data Lab. Find programme information and contact options through ARDC."
+    description: "Curated Collections is part of the ARDC Community Data Lab. Find programme information and contact options for the project partners."
     label: "Visit the Community Data Lab"
-    url: "https://ardc.edu.au/services/ardc-community-data-lab/"
+    url: "https://ardc.edu.au/project/curated-collections-for-enduring-hass-indigenous-data"
     note: "A dedicated registration form will be available here when registration opens."
 ---
 

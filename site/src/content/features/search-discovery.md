@@ -1,6 +1,6 @@
 ---
-title: "Search and Discoverability"
-summary: "Faceted search, entity relationships, maps and node graphs make collections easy to find and browse."
+title: "Search and Explore"
+summary: "Faceted search, entity relationships, maps and node graphs make collections easy to browse and explore."
 icon: "search"
 order: 4
 ---
