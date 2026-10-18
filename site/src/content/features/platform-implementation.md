@@ -4,5 +4,3 @@ summary: "We meet you where your project is at and assist with all phases of imp
 icon: "images"
 order: 2
 ---
-
-We meet you where your project is at and assist with all phases of implementation.

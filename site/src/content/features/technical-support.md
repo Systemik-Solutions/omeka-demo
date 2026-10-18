@@ -4,5 +4,3 @@ summary: "Consulting-led design, development and implementation, backed by ongoi
 icon: "support"
 order: 5
 ---
-
-Consulting-led design, development and implementation, backed by ongoing technical support.

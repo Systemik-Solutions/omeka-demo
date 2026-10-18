@@ -4,5 +4,3 @@ summary: "Bring legacy collections into Omeka S, with data mapped to HASS linked
 icon: "database"
 order: 3
 ---
-
-Bring legacy collections into Omeka S, with data mapped to HASS linked open data standards.
