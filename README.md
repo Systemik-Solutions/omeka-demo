@@ -10,9 +10,10 @@ Open the relevant Markdown file on GitHub, select **Edit**, make your changes, a
 | --- | --- |
 | Project titles, descriptions, tags and links | [`site/src/content/projects/`](site/src/content/projects/) |
 | About, Services, Getting Started and information pages | [`site/src/content/pages/`](site/src/content/pages/) |
+| Contact page headings, text, button labels and notices | [`site/src/content/pages/contact.md`](site/src/content/pages/contact.md) |
 | Feature descriptions | [`site/src/content/features/`](site/src/content/features/) |
 | Project images | [`site/public/images/`](site/public/images/) |
-| Homepage, gallery and contact templates | [`site/src/pages/`](site/src/pages/) |
+| Homepage, gallery and page layouts | [`site/src/pages/`](site/src/pages/) |
 
 Keep the existing Markdown front matter fields and quote text where needed. To add a project, copy an existing project file, choose a unique filename, update its fields and upload its image. Image paths in Markdown start with `/images/`; the build adds the correct website prefix.
 

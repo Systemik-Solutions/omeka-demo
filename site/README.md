@@ -53,7 +53,9 @@ Project images live in `public/images/`. Use descriptive filenames and compresse
 
 Feature descriptions live in `src/content/features/`. About, Getting Started, Services, Developers and information pages live in `src/content/pages/`. Shared navigation and public contact settings are in `src/lib/site.ts`. Homepage introductory copy is in `src/pages/index.astro`.
 
-There are 29 Markdown files: 16 projects, 7 information pages and 6 feature descriptions. The homepage, gallery, features overview, contact page and 404 page use `.astro` templates; their layout and some introductory text are maintained in `src/pages/`. Astro combines these templates with the Markdown content to generate HTML in `dist/`. Edit the source files, then rebuild; edits to generated HTML are overwritten by the next build.
+There are 30 Markdown files: 16 projects, 8 pages (including Contact) and 6 feature descriptions. Contact page text lives in `src/content/pages/contact.md`: edit its front matter for headings, button labels and notices, and its Markdown body for the introductory paragraph and list. `src/pages/contact.astro` supplies the layout and chooses the configured enquiry method.
+
+The homepage, gallery, features overview and 404 page still contain introductory text in their `.astro` templates under `src/pages/`. Astro combines templates with Markdown content to generate HTML in `dist/`. Edit the source files, then rebuild; edits to generated HTML are overwritten by the next build.
 
 ## Design and source material
 
@@ -71,7 +73,7 @@ The archived HTML catalogue remains in the repository's `docs/` directory. The F
 
 Copy `.env.example` to `.env` if needed. Set **one approved registration destination** with `PUBLIC_SIGNUP_URL` (an HTTPS hosted form), or set `PUBLIC_CONTACT_EMAIL` for email enquiries. Rebuild after any setting changes. These values are public configuration, never API keys.
 
-The contact page links to the external form if configured, otherwise to the configured email address. With neither configured, it provides a truthful link to the ARDC Community Data Lab and states that the dedicated form is not yet available. It does not simulate submissions or store personal information. An embedded form or custom endpoint should only be added after its provider, fields and privacy wording are agreed.
+The contact page links to the external form if configured, otherwise to the configured email address. With neither configured, it shows the fallback information and link from `src/content/pages/contact.md`, initially the ARDC Community Data Lab. The same Markdown file contains the copy for all three states and the email subject. Keep `template: "contact"` so it uses the contact layout. It does not simulate submissions or store personal information. An embedded form or custom endpoint should only be added after its provider, fields and privacy wording are agreed.
 
 Privacy, copyright and accessibility copy describes this implementation and should be checked by the site owner before a public institutional launch. Some inherited collection links point to staging websites; confirm their preferred public URLs before that launch.
 

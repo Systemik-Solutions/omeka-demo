@@ -6,7 +6,8 @@ import Partners from "../components/Partners.astro";
 import EnquiryBanner from "../components/EnquiryBanner.astro";
 import { url } from "../lib/site";
 export async function getStaticPaths() {
-  return (await getCollection("pages")).map((page) => ({
+  const pages = await getCollection("pages", ({ data }) => data.template !== "contact");
+  return pages.map((page) => ({
     params: { slug: page.id },
     props: { page },
   }));

@@ -29,14 +29,36 @@ const features = defineCollection({
   }),
 });
 
+const pageMetadata = z.object({
+  title: z.string(),
+  summary: z.string(),
+  eyebrow: z.string(),
+});
+
+const contactAction = z.object({
+  description: z.string(),
+  label: z.string(),
+});
+
 const pages = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/pages" }),
-  schema: z.object({
-    title: z.string(),
-    summary: z.string(),
-    eyebrow: z.string(),
-    template: z.enum(["text", "about"]).default("text"),
-  }),
+  schema: z.union([
+    pageMetadata.extend({
+      template: z.enum(["text", "about"]).default("text"),
+    }),
+    pageMetadata.extend({
+      template: z.literal("contact"),
+      banner: z.object({ title: z.string(), summary: z.string() }),
+      heading: z.array(z.string()).min(1),
+      guideLink: z.object({ label: z.string(), path: z.string().startsWith("/") }),
+      panel: z.object({
+        title: z.string(),
+        signup: contactAction.extend({ note: z.string() }),
+        email: contactAction.extend({ subject: z.string() }),
+        fallback: contactAction.extend({ note: z.string(), url: z.url() }),
+      }),
+    }),
+  ]),
 });
 
 export const collections = { projects, features, pages };
