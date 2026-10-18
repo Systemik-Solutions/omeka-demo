@@ -1,0 +1,10 @@
+---
+interface Props {
+  lines: string[];
+  breakClass?: string;
+}
+const { lines, breakClass } = Astro.props;
+---
+{lines.map((line, index) => (
+  <>{index > 0 && <><br class={breakClass} />{breakClass ? " " : ""}</>}{line}</>
+))}

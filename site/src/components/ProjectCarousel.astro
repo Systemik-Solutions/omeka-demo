@@ -2,10 +2,12 @@
 import type { CollectionEntry } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
 import Icon from "./Icon.astro";
+import { getSiteContent } from "../lib/content";
 interface Props {
   projects: CollectionEntry<"projects">[];
 }
 const { projects } = Astro.props;
+const { carousel } = await getSiteContent();
 ---
 
 <div class="carousel" data-carousel>
@@ -14,7 +16,7 @@ const { projects } = Astro.props;
     id="featured-collections"
     tabindex="0"
     role="region"
-    aria-label="Featured collections"
+    aria-label={carousel.regionLabel}
   >
     {projects.map((project) => (
       <ProjectCard project={project} />
@@ -24,16 +26,16 @@ const { projects } = Astro.props;
     <button
       class="circle-button"
       data-direction="-1"
-      aria-label="Previous collections"
+      aria-label={carousel.previousLabel}
       aria-controls="featured-collections"
     >
       <Icon name="arrow" class="rotate" size={21} />
     </button>
-    <span class="carousel-label">Explore the collections</span>
+    <span class="carousel-label">{carousel.caption}</span>
     <button
       class="circle-button"
       data-direction="1"
-      aria-label="Next collections"
+      aria-label={carousel.nextLabel}
       aria-controls="featured-collections"
     >
       <Icon name="arrow" size={21} />

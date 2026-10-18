@@ -1,23 +1,24 @@
 ---
+import { getEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { url } from "../lib/site";
+const page = await getEntry("pages", "404");
+if (!page || page.data.template !== "not-found") throw new Error("Missing 404 page Markdown.");
+const content = page.data;
 ---
 
-<BaseLayout title="Page not found">
+<BaseLayout title={content.title} description={content.summary}>
   <section class="section">
     <div class="container not-found">
-      <p class="eyebrow">404 — Page not found</p>
-      <h1>Let’s find your way back.</h1>
-      <p>
-        The page may have moved. Explore the collection gallery or return to the
-        homepage.
-      </p>
+      <p class="eyebrow">{content.eyebrow}</p>
+      <h1>{content.heading}</h1>
+      <p>{content.description}</p>
       <div class="hero-actions">
-        <a class="button button-gold" href={url("/")}>
-          Return home
+        <a class="button button-gold" href={url(content.primaryAction.path)}>
+          {content.primaryAction.label}
         </a>
-        <a class="button button-outline" href={url("/gallery/")}>
-          Explore the gallery
+        <a class="button button-outline" href={url(content.secondaryAction.path)}>
+          {content.secondaryAction.label}
         </a>
       </div>
     </div>

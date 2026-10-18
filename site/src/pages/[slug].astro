@@ -5,14 +5,16 @@ import PageBanner from "../components/PageBanner.astro";
 import Partners from "../components/Partners.astro";
 import EnquiryBanner from "../components/EnquiryBanner.astro";
 import { url } from "../lib/site";
+import { getSiteContent } from "../lib/content";
 export async function getStaticPaths() {
-  const pages = await getCollection("pages", ({ data }) => data.template !== "contact");
+  const pages = await getCollection("pages", ({ data }) => data.template === "text" || data.template === "about");
   return pages.map((page) => ({
     params: { slug: page.id },
     props: { page },
   }));
 }
 const { page } = Astro.props;
+const { textPage } = await getSiteContent();
 const { Content, headings } = await render(page);
 const sections = headings.filter((h) => h.depth === 2);
 ---
@@ -28,12 +30,12 @@ const sections = headings.filter((h) => h.depth === 2);
   >
     <aside class="content-aside">
       <a class="breadcrumb" href={url("/")}>
-        Home
+        {textPage.homeLabel}
       </a>
       <span aria-hidden="true"> / </span>
       <span>{page.data.eyebrow}</span>
-      <nav aria-label="On this page">
-        <p class="eyebrow">On this page</p>
+      <nav aria-label={textPage.contentsLabel}>
+        <p class="eyebrow">{textPage.contentsLabel}</p>
         {sections.map((section) => (
           <a href={`#${section.slug}`}>{section.text}</a>
         ))}

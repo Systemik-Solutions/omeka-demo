@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { url } from "../lib/site";
+import { getSiteContent } from "../lib/content";
 import Icon from "./Icon.astro";
 interface Props {
   project: CollectionEntry<"projects">;
@@ -8,6 +9,7 @@ interface Props {
 }
 const { project, eager = false } = Astro.props;
 const p = project.data;
+const { projectCard: labels } = await getSiteContent();
 ---
 
 <article
@@ -41,7 +43,7 @@ const p = project.data;
   <div class="project-body">
     <p class="project-institution">
       {p.institution ||
-        (p.status === "coming-soon" ? "In development" : "Research collection")}
+        (p.status === "coming-soon" ? labels.inDevelopmentLabel : labels.researchLabel)}
     </p>
     <h3>
       <a href={url(`/projects/${project.id}/`)}>{p.title}</a>
@@ -50,9 +52,9 @@ const p = project.data;
     <a
       href={url(`/projects/${project.id}/`)}
       class="button button-outline project-button"
-      aria-label={`Discover ${p.title}`}
+      aria-label={labels.discoverAriaLabel.replace("{title}", p.title)}
     >
-      Discover more <Icon name="arrow" size={17} />
+      {labels.discoverLabel} <Icon name="arrow" size={17} />
     </a>
   </div>
 </article>

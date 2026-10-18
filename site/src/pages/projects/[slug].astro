@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Icon from "../../components/Icon.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 import { url } from "../../lib/site";
+import { getSiteContent } from "../../lib/content";
 export async function getStaticPaths() {
   return (await getCollection("projects")).map((project) => ({
     params: { slug: project.id },
@@ -11,6 +12,7 @@ export async function getStaticPaths() {
   }));
 }
 const { project } = Astro.props;
+const { projectDetail: labels } = await getSiteContent();
 const p = project.data;
 const { Content } = await render(project);
 const related = (
@@ -30,9 +32,9 @@ const related = (
   <section class="project-detail-header">
     <div class="container">
       <a class="text-link" href={url("/gallery/")}>
-        <Icon name="arrow" class="rotate" size={18} /> Back to gallery
+        <Icon name="arrow" class="rotate" size={18} /> {labels.backLabel}
       </a>
-      <p class="eyebrow">{p.institution || "Research collection"}</p>
+      <p class="eyebrow">{p.institution || labels.researchLabel}</p>
       <h1>{p.title}</h1>
       <div class="detail-tags">
         {p.tags.map((tag) => (
@@ -60,21 +62,21 @@ const related = (
       </article>
     </div>
     <aside class="collection-info">
-      <p class="eyebrow">Collection information</p>
+      <p class="eyebrow">{labels.informationHeading}</p>
       <dl>
         {p.institution && (
           <>
-            <dt>Institution</dt>
+            <dt>{labels.institutionLabel}</dt>
             <dd>{p.institution}</dd>
           </>
         )}
-        <dt>Disciplines</dt>
+        <dt>{labels.disciplinesLabel}</dt>
         <dd>{p.tags.join(", ")}</dd>
-        <dt>Availability</dt>
+        <dt>{labels.availabilityLabel}</dt>
         <dd>
           {p.status === "available"
-            ? "Collection website available"
-            : "In development"}
+            ? labels.availableLabel
+            : labels.inDevelopmentLabel}
         </dd>
       </dl>
       {p.links.map((link) => (
@@ -87,8 +89,8 @@ const related = (
   {related.length > 0 && (
     <section class="section related-section">
       <div class="container">
-        <p class="eyebrow">Keep exploring</p>
-        <h2 class="spaced-heading">Related collections</h2>
+        <p class="eyebrow">{labels.relatedEyebrow}</p>
+        <h2 class="spaced-heading">{labels.relatedHeading}</h2>
         <div class="project-grid">
           {related.map((p) => (
             <ProjectCard project={p} />

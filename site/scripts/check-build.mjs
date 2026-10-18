@@ -23,6 +23,13 @@ const problems = [];
 for (const file of files) {
   const html = await readFile(file, "utf8");
   const route = "/" + path.relative(root, file).replace(/index\.html$/, "");
+  const contentFile = route.startsWith("/projects/")
+    ? `src/content${route.replace(/\/$/, "")}.md`
+    : `src/content/pages/${route === "/" ? "home" : route === "/404.html" ? "404" : route.replace(/^\/|\/$/g, "")}.md`;
+  assert(
+    await stat(contentFile).then(() => true, () => false),
+    `${route}: missing editable Markdown content at ${contentFile}`,
+  );
   const current = new URL(base + route, origin);
   assert.equal(
     (html.match(/<h1(?:\s|>)/g) || []).length,

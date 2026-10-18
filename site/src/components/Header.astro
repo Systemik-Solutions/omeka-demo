@@ -1,15 +1,17 @@
 ---
-import { navigation, url } from "../lib/site";
+import { url } from "../lib/site";
+import { getSiteContent } from "../lib/content";
 import Icon from "./Icon.astro";
 const path = Astro.url.pathname;
+const { navigation, header, registration } = await getSiteContent();
 ---
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href={url("/")} aria-label="Curated Collections home">
+    <a class="brand" href={url("/")} aria-label={header.homeLabel}>
       <img
         src={url("/brand/logo.svg")}
-        alt="Curated Collections"
+        alt={header.logoAlt}
         width="256"
         height="29"
       />
@@ -19,16 +21,18 @@ const path = Astro.url.pathname;
       type="button"
       aria-expanded="false"
       aria-controls="primary-navigation"
-      aria-label="Open navigation"
+      aria-label={header.openNavigation}
+      data-open-label={header.openNavigation}
+      data-close-label={header.closeNavigation}
       hidden
     >
       <Icon name="menu" />
-      <span>Menu</span>
+      <span>{header.menuLabel}</span>
     </button>
     <nav
       id="primary-navigation"
       class="primary-navigation"
-      aria-label="Main navigation"
+      aria-label={header.navigationLabel}
     >
       {navigation.map((item) => (
         <a
@@ -38,8 +42,8 @@ const path = Astro.url.pathname;
           {item.label}
         </a>
       ))}
-      <a class="button button-small button-gold" href={url("/contact/")}>
-        Register your interest
+      <a class="button button-small button-gold" href={url(registration.path)}>
+        {registration.label}
       </a>
     </nav>
   </div>
@@ -52,7 +56,7 @@ const path = Astro.url.pathname;
     nav.dataset.enhanced = "true";
     const close = () => {
       toggle.setAttribute("aria-expanded", "false");
-      toggle.setAttribute("aria-label", "Open navigation");
+      toggle.setAttribute("aria-label", toggle.dataset.openLabel!);
       nav.classList.remove("is-open");
     };
     toggle.addEventListener("click", () => {
@@ -60,7 +64,7 @@ const path = Astro.url.pathname;
       toggle.setAttribute("aria-expanded", String(open));
       toggle.setAttribute(
         "aria-label",
-        open ? "Close navigation" : "Open navigation",
+        open ? toggle.dataset.closeLabel! : toggle.dataset.openLabel!,
       );
       nav.classList.toggle("is-open", open);
     });

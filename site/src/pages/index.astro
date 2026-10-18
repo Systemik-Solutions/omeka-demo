@@ -1,12 +1,16 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FeatureCard from "../components/FeatureCard.astro";
 import ProjectCarousel from "../components/ProjectCarousel.astro";
 import Partners from "../components/Partners.astro";
 import EnquiryBanner from "../components/EnquiryBanner.astro";
 import Icon from "../components/Icon.astro";
+import HeadingLines from "../components/HeadingLines.astro";
 import { url } from "../lib/site";
+const page = await getEntry("pages", "home");
+if (!page || page.data.template !== "home") throw new Error("Missing home page Markdown.");
+const content = page.data;
 const features = (await getCollection("features")).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -15,21 +19,18 @@ const projects = (
 ).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout>
+<BaseLayout description={content.summary}>
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-copy">
-        <h1>Curated Collections</h1>
-        <p>
-          An enduring web publishing platform solution for HASS and Indigenous
-          research data collections.
-        </p>
+        <h1>{content.title}</h1>
+        <p>{content.hero.description}</p>
         <div class="hero-actions">
-          <a class="button button-gold" href={url("/getting-started/")}>
-            Get started <Icon name="arrow" size={18} />
+          <a class="button button-gold" href={url(content.hero.primaryAction.path)}>
+            {content.hero.primaryAction.label} <Icon name="arrow" size={18} />
           </a>
-          <a class="button button-outline" href={url("/gallery/")}>
-            Explore projects
+          <a class="button button-outline" href={url(content.hero.secondaryAction.path)}>
+            {content.hero.secondaryAction.label}
           </a>
         </div>
       </div>
@@ -47,46 +48,22 @@ const projects = (
     <div class="container">
       <div class="intro-row">
         <div>
-          <p class="eyebrow">What is Curated Collections?</p>
+          <p class="eyebrow">{content.eyebrow}</p>
           <h2 id="intro-heading">
-            A sustainable platform to manage and publish digital collections.
+            {content.introduction.title}
           </h2>
         </div>
         <p class="intro-description">
-          Curated Collections is a platform service which empowers researchers
-          to build, publish and maintain collections without specialised
-          technical skills. We provide training and support for researchers,
-          assist with migration of existing collections, support the integration
-          of Omeka S with national HASS infrastructure, and develop specialised
-          modules.
+          {content.introduction.description}
         </p>
       </div>
       <div class="principles">
-        <div>
-          <h3>
-            HASS &amp; Indigenous
-            <br />
-            Collections
-          </h3>
-          <p>
-            Working with Humanities, Arts &amp; Social Sciences research
-            collections.
-          </p>
-        </div>
-        <div>
-          <h3>Open Source</h3>
-          <p>
-            Built using Omeka S, an open source, humanities-dedicated web
-            platform.
-          </p>
-        </div>
-        <div>
-          <h3>Made to Last</h3>
-          <p>
-            Preserve and sustain research collections through robust linked data
-            protocols.
-          </p>
-        </div>
+        {content.introduction.principles.map((principle) => (
+          <div>
+            <h3><HeadingLines lines={principle.heading} /></h3>
+            <p>{principle.description}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -94,14 +71,13 @@ const projects = (
     <div class="container">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Features</p>
+          <p class="eyebrow">{content.features.eyebrow}</p>
           <h2 id="features-heading">
-            Built to make research open,
-            <br class="desktop-break" /> accessible and reusable
+            <HeadingLines lines={content.features.heading} breakClass="desktop-break" />
           </h2>
         </div>
-        <a class="text-link" href={url("/features/")}>
-          View all features <Icon name="arrow" size={18} />
+        <a class="text-link" href={url(content.features.link.path)}>
+          {content.features.link.label} <Icon name="arrow" size={18} />
         </a>
       </div>
       <div class="feature-grid">
@@ -116,14 +92,13 @@ const projects = (
     <div class="container">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Gallery</p>
+          <p class="eyebrow">{content.gallery.eyebrow}</p>
           <h2 id="gallery-heading">
-            Collections empowered
-            <br class="desktop-break" /> by public discovery
+            <HeadingLines lines={content.gallery.heading} breakClass="desktop-break" />
           </h2>
         </div>
-        <a class="text-link" href={url("/gallery/")}>
-          View gallery <Icon name="arrow" size={18} />
+        <a class="text-link" href={url(content.gallery.link.path)}>
+          {content.gallery.link.label} <Icon name="arrow" size={18} />
         </a>
       </div>
       <ProjectCarousel projects={projects} />

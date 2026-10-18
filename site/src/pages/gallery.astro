@@ -1,39 +1,38 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageBanner from "../components/PageBanner.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import Icon from "../components/Icon.astro";
+const page = await getEntry("pages", "gallery");
+if (!page || page.data.template !== "gallery") throw new Error("Missing gallery page Markdown.");
+const content = page.data;
 const projects = (await getCollection("projects")).sort(
   (a, b) => a.data.order - b.data.order,
 );
 const tags = [
-  "All collections",
+  content.filters.all,
   ...new Set(projects.flatMap((p) => p.data.tags).sort()),
 ];
 ---
 
-<BaseLayout
-  title="Gallery"
-  description="Explore research projects, exhibitions and collections supported by Curated Collections."
->
+<BaseLayout title={content.title} description={content.summary}>
   <PageBanner
-    title="Gallery"
-    summary="Discover the research, stories and connections within our digital collections."
+    title={content.banner.title}
+    summary={content.banner.summary}
   />
   <section class="gallery-page section">
     <div class="container">
-      <p class="eyebrow">Featured collections</p>
-      <h2>Explore the Gallery</h2>
+      <p class="eyebrow">{content.eyebrow}</p>
+      <h2>{content.heading}</h2>
       <p class="gallery-intro">
-        Browse curated websites for research projects, exhibitions and
-        collections. Filter the gallery by HASS disciplines and fields.
+        {content.introduction}
       </p>
       <div class="gallery-tools" hidden>
         <div
           class="filter-buttons"
           role="group"
-          aria-label="Filter collections by discipline"
+          aria-label={content.filters.label}
         >
           {tags.map((tag, i) => (
             <button
@@ -48,22 +47,23 @@ const tags = [
         </div>
         <label class="search-field">
           <Icon name="search" size={19} />
-          <span class="sr-only">Search collections</span>
+          <span class="sr-only">{content.search.label}</span>
           <input
             type="search"
             name="search"
-            placeholder="Search collections"
+            placeholder={content.search.placeholder}
             autocomplete="off"
           />
         </label>
       </div>
       <p
         class="results-count"
+        data-messages={JSON.stringify(content.results)}
         role="status"
         aria-live="polite"
         aria-atomic="true"
       >
-        {projects.length} collections
+        {content.results.plural.replace("{count}", String(projects.length))}
       </p>
       <div class="project-grid">
         {projects.map((project, index) => (
@@ -72,10 +72,10 @@ const tags = [
       </div>
       <div class="empty-state" hidden>
         <Icon name="search" size={36} />
-        <h3>No collections found</h3>
-        <p>Try another search or select a different discipline.</p>
+        <h3>{content.empty.title}</h3>
+        <p>{content.empty.description}</p>
         <button type="button" class="button button-outline" data-reset>
-          Clear filters
+          {content.empty.resetLabel}
         </button>
       </div>
     </div>
@@ -95,6 +95,12 @@ const tags = [
       'input[type="search"]',
     )!;
     const status = document.querySelector<HTMLElement>(".results-count")!;
+    const messages = JSON.parse(status.dataset.messages!) as {
+      singular: string;
+      plural: string;
+      disciplineSuffix: string;
+      searchSuffix: string;
+    };
     const empty = document.querySelector<HTMLElement>(".empty-state")!;
     let active = "";
     const update = (syncUrl = true) => {
@@ -114,7 +120,10 @@ const tags = [
           String(button.dataset.filter === active),
         ),
       );
-      status.textContent = `${count} ${count === 1 ? "collection" : "collections"}${active ? ` in ${active}` : ""}${query ? ` matching “${input.value.trim()}”` : ""}`;
+      status.textContent =
+        (count === 1 ? messages.singular : messages.plural).replace("{count}", String(count)) +
+        (active ? messages.disciplineSuffix.replace("{discipline}", active) : "") +
+        (query ? messages.searchSuffix.replace("{query}", input.value.trim()) : "");
       empty.hidden = count > 0;
       if (syncUrl) {
         const next = new URL(location.href);

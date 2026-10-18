@@ -51,11 +51,25 @@ Use `status: "coming-soon"` and `links: []` when the collection is not available
 
 Project images live in `public/images/`. Use descriptive filenames and compressed images, ideally around 1200 pixels wide. The shared brand mark can be used for a forthcoming collection. Do not put research datasets or collection records in this repository.
 
-Feature descriptions live in `src/content/features/`. About, Getting Started, Services, Developers and information pages live in `src/content/pages/`. Shared navigation and public contact settings are in `src/lib/site.ts`. Homepage introductory copy is in `src/pages/index.astro`.
+Every public page has a Markdown content file. There are 35 Markdown files: 16 projects, 12 main pages, 6 feature descriptions and 1 shared settings file. They use YAML front matter between `---` lines for structured fields; pages with longer prose also have a Markdown body.
 
-There are 30 Markdown files: 16 projects, 8 pages (including Contact) and 6 feature descriptions. Contact page text lives in `src/content/pages/contact.md`: edit its front matter for headings, button labels and notices, and its Markdown body for the introductory paragraph and list. `src/pages/contact.astro` supplies the layout and chooses the configured enquiry method.
+| Content | Markdown source |
+| --- | --- |
+| Homepage hero, introduction, principles and section headings | `src/content/pages/home.md` |
+| Gallery headings, search labels, result messages and empty state | `src/content/pages/gallery.md` |
+| Features overview headings | `src/content/pages/features.md` |
+| Individual feature descriptions | `src/content/features/*.md` |
+| Contact headings, buttons, notices and introduction | `src/content/pages/contact.md` |
+| About, Getting Started, Services, Developers and information pages | Other named files in `src/content/pages/` |
+| Page-not-found message and buttons | `src/content/pages/404.md` |
+| Project detail pages and gallery cards | `src/content/projects/*.md` |
+| Shared navigation, footer, partners, enquiry banner and interface labels | `src/content/site/settings.md` |
 
-The homepage, gallery, features overview and 404 page still contain introductory text in their `.astro` templates under `src/pages/`. Astro combines templates with Markdown content to generate HTML in `dist/`. Edit the source files, then rebuild; edits to generated HTML are overwritten by the next build.
+Keep each page's `template` value and existing field names. Home headings that wrap at a specific point use a list of lines. Gallery result messages use `{count}`, `{discipline}` and `{query}`; the shared project-card accessibility label uses `{title}`. Preserve these placeholders when editing the surrounding words. The content schema checks required fields, and `npm test` checks that every generated page has a corresponding Markdown file.
+
+The `.astro` files under `src/pages/` and `src/components/` supply layouts and behaviour. For example, `src/pages/contact.astro` chooses the configured enquiry method and displays its wording from `contact.md`. Public contact destinations remain environment settings read by `src/lib/site.ts`. Page text and shared labels can be edited entirely in Markdown without changing the Astro templates or stylesheet.
+
+Astro combines templates with Markdown content to generate HTML in `dist/`. Edit the Markdown source files, then rebuild; edits to generated HTML are overwritten by the next build.
 
 ## Design and source material
 
