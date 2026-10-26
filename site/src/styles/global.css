@@ -531,15 +531,6 @@ main:focus {
 .project-card:hover .project-image img {
   transform: scale(1.025);
 }
-.project-image-placeholder {
-  background: var(--teal-soft);
-  display: grid;
-  place-items: center;
-  padding: 70px;
-}
-.project-image-placeholder img {
-  object-fit: contain;
-}
 .project-tags {
   position: absolute;
   top: 20px;
@@ -931,11 +922,6 @@ main:focus {
   max-height: 520px;
   object-fit: cover;
   object-position: top;
-}
-.detail-placeholder {
-  background: var(--teal-soft);
-  height: 350px;
-  object-fit: contain;
 }
 .project-prose {
   padding-top: 36px;
@@ -1517,9 +1503,6 @@ main:focus {
     grid-template-columns: 1fr;
     gap: 30px;
     padding-block: 36px 55px;
-  }
-  .detail-placeholder {
-    height: 250px;
   }
   .collection-info {
     padding: 24px;

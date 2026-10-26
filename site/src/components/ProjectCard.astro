@@ -19,10 +19,7 @@ const { projectCard: labels } = await getSiteContent();
   data-search={`${p.title} ${p.summary} ${p.institution}`.toLowerCase()}
 >
   <a
-    class:list={[
-      "project-image",
-      { "project-image-placeholder": p.image === "/brand/mark.svg" },
-    ]}
+    class="project-image"
     href={url(`/projects/${project.id}/`)}
     tabindex="-1"
     aria-hidden="true"
