@@ -1,7 +1,7 @@
 ---
 title: "Gandharan Buddhist Texts"
 summary: "A forthcoming digital collection of Gandharan Buddhist texts."
-institution: ""
+institution: "University of Sydney"
 tags: ["Language", "Heritage"]
 image: "/images/gbt.png"
 imageAlt: "Curated Collections brand mark"
