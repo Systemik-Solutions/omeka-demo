@@ -3,7 +3,7 @@ title: "Gandharan Buddhist Texts"
 summary: "A forthcoming digital collection of Gandharan Buddhist texts."
 institution: ""
 tags: ["Language", "Heritage"]
-image: "/brand/mark.svg"
+image: "/images/gbt.png"
 imageAlt: "Curated Collections brand mark"
 order: 12
 featured: false
