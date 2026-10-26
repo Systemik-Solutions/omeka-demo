@@ -24,13 +24,15 @@ const { projectCard: labels } = await getSiteContent();
     tabindex="-1"
     aria-hidden="true"
   >
-    <img
-      src={url(p.image)}
-      alt=""
-      width="826"
-      height="448"
-      loading={eager ? "eager" : "lazy"}
-    />
+    {p.image && (
+      <img
+        src={url(p.image)}
+        alt=""
+        width="826"
+        height="448"
+        loading={eager ? "eager" : "lazy"}
+      />
+    )}
   </a>
   <div class="project-tags">
     {p.tags.slice(0, 3).map((tag) => (

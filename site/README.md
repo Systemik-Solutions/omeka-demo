@@ -49,7 +49,7 @@ The longer project description goes here.
 
 Use `status: "coming-soon"` and `links: []` when the collection is not available. `featured: true` includes it in the homepage carousel. The optional `managementUrl` preserves the existing catalogue's administration link for maintainers; it is deliberately never rendered into the product website. The schema in `src/content.config.ts` validates required fields at build time.
 
-Project images live in `public/images/`. Use descriptive filenames and compressed images, ideally around 1200 pixels wide. The shared brand mark can be used for a forthcoming collection. Do not put research datasets or collection records in this repository.
+Project images live in `public/images/`. Use descriptive filenames and compressed images, ideally around 1200 pixels wide. When a project has no image yet, leave `image: ""` and `imageAlt: ""`; the gallery card and project page keep an empty image area. These fields may also be omitted. Adding an image path later displays the picture in the existing area, regardless of project status. Do not put research datasets or collection records in this repository.
 
 Every public page has a Markdown content file. There are 35 Markdown files: 16 projects, 12 main pages, 6 feature descriptions and 1 shared settings file. They use YAML front matter between `---` lines for structured fields; pages with longer prose also have a Markdown body.
 

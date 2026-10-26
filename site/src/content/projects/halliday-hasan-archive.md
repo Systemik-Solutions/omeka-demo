@@ -3,8 +3,8 @@ title: "Halliday and Hasan Archive"
 summary: "A forthcoming digital archive dedicated to Halliday and Hasan."
 institution: ""
 tags: ["Language"]
-image: "/brand/mark.svg"
-imageAlt: "Curated Collections brand mark"
+image: ""
+imageAlt: ""
 order: 13
 featured: false
 status: "coming-soon"

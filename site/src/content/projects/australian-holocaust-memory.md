@@ -3,8 +3,8 @@ title: "Australian Holocaust Memory"
 summary: "A forthcoming research collection on Australian Holocaust memory."
 institution: ""
 tags: ["History", "Society"]
-image: "/brand/mark.svg"
-imageAlt: "Curated Collections brand mark"
+image: ""
+imageAlt: ""
 order: 16
 featured: false
 status: "coming-soon"

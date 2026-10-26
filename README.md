@@ -19,6 +19,8 @@ Every public page has a Markdown content file. Each uses YAML front matter betwe
 
 Keep the existing front matter fields, `template` values and placeholders such as `{count}` and `{title}`; quote text where needed. To add a project, copy an existing project file, choose a unique filename, update its fields and upload its image. Image paths in Markdown start with `/images/`; the build adds the correct website prefix.
 
+For a project without a picture, leave `image: ""` and `imageAlt: ""`. The site keeps an empty image area until a picture is added.
+
 Every change under `site/` committed or merged into `main` triggers the **Build and deploy website** workflow. It validates the content, builds the pages, checks links and publishes the result. Follow progress in the [Actions tab](https://github.com/Systemik-Solutions/omeka-demo/actions/workflows/website.yml). The live website changes when deployment succeeds. If a check fails, the previous published version stays available.
 
 Pull requests run the same checks without deploying. Visitors can read the website without signing in; content editors need GitHub repository access.

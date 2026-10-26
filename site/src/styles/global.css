@@ -923,6 +923,10 @@ main:focus {
   object-fit: cover;
   object-position: top;
 }
+.detail-image-empty {
+  aspect-ratio: 1200 / 700;
+  background: var(--teal-soft);
+}
 .project-prose {
   padding-top: 36px;
   font-size: 17px;

@@ -47,13 +47,17 @@ const related = (
   </section>
   <div class="container project-detail-grid">
     <div>
-      <img
-        class="detail-image"
-        src={url(p.image)}
-        alt={p.imageAlt}
-        width="1200"
-        height="700"
-      />
+      {p.image ? (
+        <img
+          class="detail-image"
+          src={url(p.image)}
+          alt={p.imageAlt}
+          width="1200"
+          height="700"
+        />
+      ) : (
+        <div class="detail-image detail-image-empty" aria-hidden="true"></div>
+      )}
       <article class="prose project-prose">
         <Content />
       </article>

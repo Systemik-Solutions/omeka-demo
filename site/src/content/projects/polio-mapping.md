@@ -3,8 +3,8 @@ title: "Polio Mapping"
 summary: "A forthcoming research collection exploring polio through mapping."
 institution: ""
 tags: ["History", "Society"]
-image: "/brand/mark.svg"
-imageAlt: "Curated Collections brand mark"
+image: ""
+imageAlt: ""
 order: 14
 featured: false
 status: "coming-soon"
