@@ -21,7 +21,7 @@ const { projectCard: labels } = await getSiteContent();
   <a
     class:list={[
       "project-image",
-      { "project-image-placeholder": p.status === "coming-soon" },
+      { "project-image-placeholder": p.image === "/brand/mark.svg" },
     ]}
     href={url(`/projects/${project.id}/`)}
     tabindex="-1"

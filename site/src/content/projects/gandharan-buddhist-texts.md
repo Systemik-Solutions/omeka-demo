@@ -4,7 +4,7 @@ summary: "A forthcoming digital collection of Gandharan Buddhist texts."
 institution: "University of Sydney"
 tags: ["Language", "Heritage"]
 image: "/images/gbt.png"
-imageAlt: "Curated Collections brand mark"
+imageAlt: "Screenshot of the Gandharan Buddhist Texts collection website"
 order: 12
 featured: false
 status: "coming-soon"
