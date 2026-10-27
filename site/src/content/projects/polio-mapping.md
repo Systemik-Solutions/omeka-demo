@@ -3,7 +3,7 @@ title: "Polio Mapping"
 summary: "A forthcoming research collection exploring polio through mapping."
 institution: ""
 tags: ["History", "Society"]
-image: ""
+image: "/images/pams.png"
 imageAlt: ""
 order: 14
 featured: false
