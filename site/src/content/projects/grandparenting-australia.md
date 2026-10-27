@@ -3,7 +3,7 @@ title: "Grandparenting in Australia"
 summary: "A forthcoming research collection on grandparenting in Australia."
 institution: ""
 tags: ["Society"]
-image: ""
+image: "/images/grandparent.png"
 imageAlt: ""
 order: 15
 featured: false
