@@ -3,7 +3,7 @@ title: "Halliday and Hasan Archive"
 summary: "A forthcoming digital archive dedicated to Halliday and Hasan."
 institution: ""
 tags: ["Language"]
-image: ""
+image: "/images/haliday.png"
 imageAlt: ""
 order: 13
 featured: false
