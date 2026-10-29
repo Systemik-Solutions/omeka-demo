@@ -87,12 +87,17 @@ const pages = defineCollection({
       banner,
       heading: z.string(),
       introduction: z.string(),
-      filters: z.object({ all: z.string(), label: z.string() }),
+      filters: z.object({
+        all: z.string(),
+        label: z.string(),
+        institution: z.object({ label: z.string(), all: z.string() }),
+      }),
       search: z.object({ label: z.string(), placeholder: z.string() }),
       results: z.object({
         singular: z.string(),
         plural: z.string(),
         disciplineSuffix: z.string(),
+        institutionSuffix: z.string(),
         searchSuffix: z.string(),
       }),
       empty: z.object({ title: z.string(), description: z.string(), resetLabel: z.string() }),

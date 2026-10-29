@@ -49,6 +49,8 @@ The longer project description goes here.
 
 Use `status: "coming-soon"` and `links: []` when the collection is not available. `featured: true` includes it in the homepage carousel. The optional `managementUrl` preserves the existing catalogue's administration link for maintainers; it is deliberately never rendered into the product website. The schema in `src/content.config.ts` validates required fields at build time.
 
+The gallery's institution filter is populated from each project's `institution` field. Separate multiple institutions with commas, for example `institution: "University of Sydney, Australian Museum"`, so the project appears under either institution. Projects with an empty institution remain visible under **All institutions**. Institution, discipline and search filters work together, and their selections are included in the gallery URL for sharing. Filter labels and result messages are editable in `src/content/pages/gallery.md`.
+
 Project images live in `public/images/`. Use descriptive filenames and compressed images, ideally around 1200 pixels wide. When a project has no image yet, leave `image: ""` and `imageAlt: ""`; the gallery card and project page keep an empty image area. These fields may also be omitted. Adding an image path later displays the picture in the existing area, regardless of project status. Do not put research datasets or collection records in this repository.
 
 Every public page has a Markdown content file. There are 35 Markdown files: 16 projects, 12 main pages, 6 feature descriptions and 1 shared settings file. They use YAML front matter between `---` lines for structured fields; pages with longer prose also have a Markdown body.
@@ -67,7 +69,7 @@ Every public page has a Markdown content file. There are 35 Markdown files: 16 p
 
 Feature cards display the `summary` field from their Markdown file. Edit that field to change the description; feature files do not need a Markdown body.
 
-Keep each page's `template` value and existing field names. Home headings that wrap at a specific point use a list of lines. Gallery result messages use `{count}`, `{discipline}` and `{query}`; the shared project-card accessibility label uses `{title}`. Preserve these placeholders when editing the surrounding words. The content schema checks required fields, and `npm test` checks that every generated page has a corresponding Markdown file.
+Keep each page's `template` value and existing field names. Home headings that wrap at a specific point use a list of lines. Gallery result messages use `{count}`, `{discipline}`, `{institution}` and `{query}`; the shared project-card accessibility label uses `{title}`. Preserve these placeholders when editing the surrounding words. The content schema checks required fields, and `npm test` checks that every generated page has a corresponding Markdown file.
 
 The `.astro` files under `src/pages/` and `src/components/` supply layouts and behaviour. For example, `src/pages/contact.astro` chooses the configured enquiry method and displays its wording from `contact.md`. Public contact destinations remain environment settings read by `src/lib/site.ts`. Page text and shared labels can be edited entirely in Markdown without changing the Astro templates or stylesheet.
 

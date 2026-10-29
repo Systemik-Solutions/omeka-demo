@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageBanner from "../components/PageBanner.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import Icon from "../components/Icon.astro";
+import { getInstitutions } from "../lib/projects";
 const page = await getEntry("pages", "gallery");
 if (!page || page.data.template !== "gallery") throw new Error("Missing gallery page Markdown.");
 const content = page.data;
@@ -14,6 +15,9 @@ const tags = [
   content.filters.all,
   ...new Set(projects.flatMap((p) => p.data.tags).sort()),
 ];
+const institutions = [
+  ...new Set(projects.flatMap((project) => getInstitutions(project.data.institution))),
+].sort((a, b) => a.localeCompare(b));
 ---
 
 <BaseLayout title={content.title} description={content.summary}>
@@ -45,6 +49,15 @@ const tags = [
             </button>
           ))}
         </div>
+        <label class="institution-filter">
+          <span class="sr-only">{content.filters.institution.label}</span>
+          <select name="institution">
+            <option value="">{content.filters.institution.all}</option>
+            {institutions.map((institution) => (
+              <option value={institution}>{institution}</option>
+            ))}
+          </select>
+        </label>
         <label class="search-field">
           <Icon name="search" size={19} />
           <span class="sr-only">{content.search.label}</span>
@@ -94,11 +107,15 @@ const tags = [
     const input = document.querySelector<HTMLInputElement>(
       'input[type="search"]',
     )!;
+    const institution = document.querySelector<HTMLSelectElement>(
+      'select[name="institution"]',
+    )!;
     const status = document.querySelector<HTMLElement>(".results-count")!;
     const messages = JSON.parse(status.dataset.messages!) as {
       singular: string;
       plural: string;
       disciplineSuffix: string;
+      institutionSuffix: string;
       searchSuffix: string;
     };
     const empty = document.querySelector<HTMLElement>(".empty-state")!;
@@ -108,8 +125,10 @@ const tags = [
       const query = input.value.trim().toLowerCase();
       cards.forEach((card) => {
         const tags = JSON.parse(card.dataset.tags || "[]") as string[];
+        const institutions = JSON.parse(card.dataset.institutions || "[]") as string[];
         const matches =
           (!active || tags.includes(active)) &&
+          (!institution.value || institutions.includes(institution.value)) &&
           (!query || card.dataset.search?.includes(query));
         card.hidden = !matches;
         if (matches) count++;
@@ -123,6 +142,7 @@ const tags = [
       status.textContent =
         (count === 1 ? messages.singular : messages.plural).replace("{count}", String(count)) +
         (active ? messages.disciplineSuffix.replace("{discipline}", active) : "") +
+        (institution.value ? messages.institutionSuffix.replace("{institution}", institution.value) : "") +
         (query ? messages.searchSuffix.replace("{query}", input.value.trim()) : "");
       empty.hidden = count > 0;
       if (syncUrl) {
@@ -130,6 +150,9 @@ const tags = [
         active
           ? next.searchParams.set("discipline", active)
           : next.searchParams.delete("discipline");
+        institution.value
+          ? next.searchParams.set("institution", institution.value)
+          : next.searchParams.delete("institution");
         query
           ? next.searchParams.set("q", input.value.trim())
           : next.searchParams.delete("q");
@@ -142,6 +165,10 @@ const tags = [
       active = buttons.some((b) => b.dataset.filter === requested)
         ? requested
         : "";
+      const requestedInstitution = params.get("institution") || "";
+      institution.value = Array.from(institution.options).some(
+        (option) => option.value === requestedInstitution,
+      ) ? requestedInstitution : "";
       input.value = params.get("q") || "";
       update(false);
     };
@@ -152,8 +179,10 @@ const tags = [
       }),
     );
     input.addEventListener("input", () => update());
+    institution.addEventListener("change", () => update());
     document.querySelector("[data-reset]")?.addEventListener("click", () => {
       active = "";
+      institution.value = "";
       input.value = "";
       update();
       input.focus();
