@@ -1,9 +1,10 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FeatureCard from "../components/FeatureCard.astro";
 import ProjectCarousel from "../components/ProjectCarousel.astro";
 import Partners from "../components/Partners.astro";
+import Acknowledgement from "../components/Acknowledgement.astro";
 import EnquiryBanner from "../components/EnquiryBanner.astro";
 import Icon from "../components/Icon.astro";
 import HeadingLines from "../components/HeadingLines.astro";
@@ -11,6 +12,7 @@ import { url } from "../lib/site";
 const page = await getEntry("pages", "home");
 if (!page || page.data.template !== "home") throw new Error("Missing home page Markdown.");
 const content = page.data;
+const { Content: AcknowledgementContent } = await render(page);
 const features = (await getCollection("features")).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -105,4 +107,12 @@ const projects = (
     </div>
   </section>
   <Partners />
+  {content.acknowledgement && content.acknowledgement.logos.length > 0 && (
+    <Acknowledgement
+      label={content.acknowledgement.label}
+      logos={content.acknowledgement.logos}
+    >
+      <AcknowledgementContent />
+    </Acknowledgement>
+  )}
 </BaseLayout>

@@ -81,6 +81,13 @@ const pages = defineCollection({
       }),
       features: homeSection,
       gallery: homeSection,
+      acknowledgement: z.object({
+        label: z.string().trim().min(1),
+        logos: z.array(z.object({
+          image: z.string().trim().startsWith("/"),
+          imageAlt: z.string().trim().min(1),
+        })).default([]),
+      }).optional(),
     }),
     pageMetadata.extend({
       template: z.literal("gallery"),

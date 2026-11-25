@@ -618,6 +618,39 @@ main:focus {
   max-height: 115px;
   object-fit: contain;
 }
+.acknowledgement {
+  background: white;
+  border-top: 1px solid var(--line);
+  padding-block: clamp(32px, 5vw, 64px);
+  text-align: center;
+}
+.acknowledgement-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 32px 48px;
+  margin-bottom: 32px;
+}
+.acknowledgement-logos img {
+  width: 240px;
+  max-width: 100%;
+  height: auto;
+  max-height: 110px;
+  object-fit: contain;
+}
+.acknowledgement-copy {
+  max-width: 1120px;
+  margin-inline: auto;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.acknowledgement-copy > * + * {
+  margin-top: 1em;
+}
+.acknowledgement-copy a {
+  overflow-wrap: anywhere;
+}
 .site-footer {
   background: var(--footer);
   color: #f7f7f3;
