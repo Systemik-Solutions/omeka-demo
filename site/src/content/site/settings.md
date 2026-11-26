@@ -39,28 +39,6 @@ footer:
 enquiry:
   title: "Want to know how we can assist with your research project?"
   link: { label: "Enquire today", path: "/contact/" }
-partners:
-  eyebrow: "Partners"
-  title: "Our Partners"
-  items:
-    - url: "https://www.sydney.edu.au/research/facilities/sydney-informatics-hub.html"
-      label: "Sydney Informatics Hub, University of Sydney"
-      image: "/brand/sydney-informatics-hub.png"
-      imageAlt: "Sydney Informatics Hub"
-      width: 270
-      height: 137
-    - url: "https://ardc.edu.au/services/ardc-community-data-lab/"
-      label: "Australian Research Data Commons"
-      image: "/brand/ardc.svg"
-      imageAlt: "ARDC — Australian Research Data Commons"
-      width: 292
-      height: 96
-    - url: "https://systemiksolutions.com/"
-      label: "Systemik Solutions"
-      image: "/brand/systemik.png"
-      imageAlt: "Systemik Solutions"
-      width: 310
-      height: 59
 carousel:
   regionLabel: "Featured collections"
   previousLabel: "Previous collections"

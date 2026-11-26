@@ -81,6 +81,12 @@ const pages = defineCollection({
       }),
       features: homeSection,
       gallery: homeSection,
+      partners: z.object({
+        eyebrow: z.string(), title: z.string(),
+        items: z.array(z.object({
+          url: z.url(), label: z.string(), image: z.string(), imageAlt: z.string(),
+        })),
+      }),
       acknowledgement: z.object({
         label: z.string().trim().min(1),
         logos: z.array(z.object({
@@ -141,13 +147,6 @@ const site = defineCollection({
       informationLinks: z.array(internalLink), legalLinks: z.array(internalLink),
     }),
     enquiry: z.object({ title: z.string(), link: internalLink }),
-    partners: z.object({
-      eyebrow: z.string(), title: z.string(),
-      items: z.array(z.object({
-        url: z.url(), label: z.string(), image: z.string(), imageAlt: z.string(),
-        width: z.number(), height: z.number(),
-      })),
-    }),
     carousel: z.object({ regionLabel: z.string(), previousLabel: z.string(), nextLabel: z.string(), caption: z.string() }),
     projectCard: z.object({
       researchLabel: z.string(), inDevelopmentLabel: z.string(),

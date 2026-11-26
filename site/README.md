@@ -57,7 +57,7 @@ Every public page has a Markdown content file. There are 35 Markdown files: 16 p
 
 | Content | Markdown source |
 | --- | --- |
-| Homepage hero, introduction, principles and section headings | `src/content/pages/home.md` |
+| Homepage hero, introduction, principles, section headings and partners | `src/content/pages/home.md` |
 | Gallery headings, search labels, result messages and empty state | `src/content/pages/gallery.md` |
 | Features overview headings | `src/content/pages/features.md` |
 | Individual feature descriptions | `src/content/features/*.md` |
@@ -65,9 +65,11 @@ Every public page has a Markdown content file. There are 35 Markdown files: 16 p
 | About, Getting Started, Services, Developers and information pages | Other named files in `src/content/pages/` |
 | Page-not-found message and buttons | `src/content/pages/404.md` |
 | Project detail pages and gallery cards | `src/content/projects/*.md` |
-| Shared navigation, footer, partners, enquiry banner and interface labels | `src/content/site/settings.md` |
+| Shared navigation, footer, enquiry banner and interface labels | `src/content/site/settings.md` |
 
 Feature cards display the `summary` field from their Markdown file. Edit that field to change the description; feature files do not need a Markdown body.
+
+Edit `partners` in `src/content/pages/home.md` to change **Our Partners** on both Home and About. Each `items` entry needs only `url`, `label`, `image` and `imageAlt`. Upload each logo separately to `public/brand/` and use its `/brand/filename.ext` path; CSS fits the image into its card while preserving its proportions. No `width` or `height` fields are required.
 
 Keep each page's `template` value and existing field names. Home headings that wrap at a specific point use a list of lines. Gallery result messages use `{count}`, `{discipline}`, `{institution}` and `{query}`; the shared project-card accessibility label uses `{title}`. Preserve these placeholders when editing the surrounding words. The content schema checks required fields, and `npm test` checks that every generated page has a corresponding Markdown file.
 

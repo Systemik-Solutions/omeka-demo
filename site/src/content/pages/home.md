@@ -33,6 +33,22 @@ gallery:
   link:
     label: "View gallery"
     path: "/gallery/"
+partners:
+  eyebrow: "Partners"
+  title: "Our Partners"
+  items:
+    - url: "https://www.sydney.edu.au/research/facilities/sydney-informatics-hub.html"
+      label: "Sydney Informatics Hub, University of Sydney"
+      image: "/brand/sydney-informatics-hub.png"
+      imageAlt: "Sydney Informatics Hub"
+    - url: "https://ardc.edu.au/services/ardc-community-data-lab/"
+      label: "Australian Research Data Commons"
+      image: "/brand/ardc.svg"
+      imageAlt: "ARDC — Australian Research Data Commons"
+    - url: "https://systemiksolutions.com/"
+      label: "Systemik Solutions"
+      image: "/brand/systemik.png"
+      imageAlt: "Systemik Solutions"
 # acknowledgement:
 #   # Appears automatically when at least one logo is listed.
 #   label: "Funding acknowledgement"
