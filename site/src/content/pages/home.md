@@ -50,8 +50,8 @@ partners:
       image: "/brand/systemik.png"
       imageAlt: "Systemik Solutions"
     - url: "https://ardc.edu.au/"
-  label: "Partner name"
-  image: "/brand/d94223af-9e6a-479b-853c-bd9a88c60b2a.png"
-  imageAlt: "Partner logo"
+      label: "Partner name"
+      image: "/brand/d94223af-9e6a-479b-853c-bd9a88c60b2a.png"
+      imageAlt: "Partner logo"
 ---
 Australian Creative Histories & Futures is a co-investment partnership with the Australian Research Data Commons (ARDC) through the HASS and Indigenous Research Data Commons (DOI: [10.3565/3t64-zy41](https://doi.org/10.3565/3t64-zy41)). The ARDC is enabled by the Australian Government’s National Collaborative Research Infrastructure Strategy (NCRIS).
