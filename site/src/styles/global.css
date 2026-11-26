@@ -618,6 +618,10 @@ main:focus {
   max-height: 115px;
   object-fit: contain;
 }
+.partners-copy {
+  margin-top: 40px;
+  text-align: center;
+}
 .acknowledgement {
   background: var(--canvas);
   border-top: 1px solid var(--line);
@@ -639,15 +643,18 @@ main:focus {
   max-height: 110px;
   object-fit: contain;
 }
+.partners-copy,
 .acknowledgement-copy {
   max-width: 1120px;
   margin-inline: auto;
   font-size: 1rem;
   line-height: 1.75;
 }
+.partners-copy > * + *,
 .acknowledgement-copy > * + * {
   margin-top: 1em;
 }
+.partners-copy a,
 .acknowledgement-copy a {
   overflow-wrap: anywhere;
 }

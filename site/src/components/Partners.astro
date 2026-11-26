@@ -1,9 +1,11 @@
 ---
 import { url } from "../lib/site";
-import { getEntry } from "astro:content";
+import { getEntry, render } from "astro:content";
 const home = await getEntry("pages", "home");
 if (!home || home.data.template !== "home") throw new Error("Missing home page Markdown.");
 const { partners } = home.data;
+const { Content } = await render(home);
+const hasCopy = Boolean(home.body?.replace(/<!--[\s\S]*?-->/g, "").trim());
 ---
 
 <section class="partners section" aria-labelledby="partners-heading">
@@ -21,5 +23,10 @@ const { partners } = home.data;
         </a>
       ))}
     </div>
+    {hasCopy && (
+      <div class="partners-copy">
+        <Content />
+      </div>
+    )}
   </div>
 </section>
