@@ -69,7 +69,7 @@ Every public page has a Markdown content file. There are 35 Markdown files: 16 p
 
 Feature cards display the `summary` field from their Markdown file. Edit that field to change the description; feature files do not need a Markdown body.
 
-Edit `partners` in `src/content/pages/home.md` to change **Our Partners** on both Home and About. Each `items` entry needs only `url`, `label`, `image` and `imageAlt`. Upload each logo separately to `public/brand/` and use its `/brand/filename.ext` path; CSS fits the image into its card while preserving its proportions. No `width` or `height` fields are required.
+Edit `partners` in `src/content/pages/home.md` to change **Our Partners** on both Home and About. Each `items` entry needs only `url`, `label`, `image` and `imageAlt`. Upload each logo separately to `public/brand/` and use its `/brand/filename.ext` path; CSS fits the image into its card while preserving its proportions. No `width` or `height` fields are required. Optional `layout: "banner"` spans the full grid, centres a larger image and removes the card styling; entries without it remain standard cards. Keep the funding banner last to position it directly above the acknowledgement paragraph.
 
 Keep each page's `template` value and existing field names. Home headings that wrap at a specific point use a list of lines. Gallery result messages use `{count}`, `{discipline}`, `{institution}` and `{query}`; the shared project-card accessibility label uses `{title}`. Preserve these placeholders when editing the surrounding words. The content schema checks required fields, and `npm test` checks that every generated page has a corresponding Markdown file.
 

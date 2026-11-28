@@ -23,7 +23,7 @@ Keep the existing front matter fields, `template` values and placeholders such a
 
 For a project without a picture, leave `image: ""` and `imageAlt: ""`. The site keeps an empty image area until a picture is added.
 
-To add a partner, upload its logo to `site/public/brand/` and add an entry under `partners.items` in `site/src/content/pages/home.md`. Each entry only needs `url`, `label`, `image` (for example `/brand/new-partner.png`) and `imageAlt`; image dimensions are handled automatically. This list supplies **Our Partners** on both Home and About.
+To add a partner, upload its logo to `site/public/brand/` and add an entry under `partners.items` in `site/src/content/pages/home.md`. Each entry only needs `url`, `label`, `image` (for example `/brand/new-partner.png`) and `imageAlt`; image dimensions are handled automatically. This list supplies **Our Partners** on both Home and About. Add `layout: "banner"` to an entry to display it larger and centred on its own row, without a card or border. Keep the funding banner after the standard partner entries.
 
 Every change under `site/` committed or merged into `main` triggers the **Build and deploy website** workflow. It validates the content, builds the pages, checks links and publishes the result. Follow progress in the [Actions tab](https://github.com/Systemik-Solutions/omeka-demo/actions/workflows/website.yml). The live website changes when deployment succeeds. If a check fails, the previous published version stays available.
 

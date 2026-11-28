@@ -85,6 +85,7 @@ const pages = defineCollection({
         eyebrow: z.string(), title: z.string(),
         items: z.array(z.object({
           url: z.url(), label: z.string(), image: z.string(), imageAlt: z.string(),
+          layout: z.enum(["card", "banner"]).default("card"),
         })),
       }),
       acknowledgement: z.object({
